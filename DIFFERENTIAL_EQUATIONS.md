@@ -133,6 +133,6 @@ where:
 
 Now we have something powerful: **a single equation that predicts the temperature at any future time t.**
 
-For example, if we know the initial temperature, room temperature, and cooling constant, we can calculate the tea's temperature after 5 minutes, 10 minutes, or 30 minutes.
+For example, if we know the initial temperature, room temperature, and cooling constant, we can calculate the tea's temperature after 5 minutes, 10 minutes, or 30 minutes or at any instant of time.
 
 This is the first payoff of the differential equation: **we started with an observation about how things change and arrived at an equation that can predict their future behavior.**
