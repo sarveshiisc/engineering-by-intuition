@@ -98,7 +98,6 @@ The next step is to **solve this equation**.
 Solving it gives us a mathematical expression for **T as a function of time t**.
 
 That means we can use it to answer questions like:
-
 - What will the temperature be after 5 minutes?
 - After 10 minutes?
 - How long will it take to reach a certain temperature?
@@ -136,3 +135,35 @@ Now we have something powerful: **a single equation that predicts the temperatur
 For example, if we know the initial temperature, room temperature, and cooling constant, we can calculate the tea's temperature after 5 minutes, 10 minutes, or 30 minutes or at any instant of time.
 
 This is the first payoff of the differential equation: **we started with an observation about how things change and arrived at an equation that can predict their future behavior.**
+
+## 7. What Does Each Term Tell Us?
+
+The equation is:
+
+**T(t) = Tₐ + (T₀ - Tₐ)e^(-kt)**
+
+- **Tₐ — ambient temperature:** the temperature the tea approaches as time becomes very large.
+- **T₀ — initial temperature:** the temperature of the tea at `t = 0`.
+- **k — cooling constant:** describes how quickly the system responds to the temperature difference.
+
+The value of **k** depends on the physical conditions of the system, such as exposed surface area, container material and shape, air movement, heat-transfer properties, and evaporation.
+
+So **k is not a universal constant**. It represents the combined effect of these physical factors for a particular setup.
+
+## 8. What Does the Equation Tell Us?
+
+The equation gives us more than the temperature at a particular time.
+
+- At **t = 0**, the temperature is **T₀**.
+- As **t → ∞**, the temperature approaches **Tₐ**. This is the **steady-state temperature**.
+- **k** determines how quickly the temperature approaches the steady state.
+
+Instead of describing the speed of the response using **k**, engineers often use another quantity called the **time constant**, written as **τ**.
+
+**τ = 1/k**
+
+A larger **τ** means a slower response, while a smaller **τ** means a faster response.
+
+After one time constant, the system has completed about **63% of its journey from the initial temperature toward the steady-state temperature**.
+
+This idea of **time constant** appears again and again in engineering — in thermal systems, RC and RL circuits, and first-order control systems.
