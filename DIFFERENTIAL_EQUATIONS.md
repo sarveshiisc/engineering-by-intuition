@@ -208,3 +208,15 @@ A larger **τ** means a slower response, while a smaller **τ** means a faster r
 After one time constant, the system has completed about **63% of its journey from the initial temperature toward the steady-state temperature**.
 
 This idea of **time constant** appears again and again in engineering — in thermal systems, RC and RL circuits, and first-order control systems.
+
+## 10. Test It Yourself
+
+We have predicted what the equation should do.
+
+Now let's test it.
+
+Change **T₀**, **Tₐ**, and **τ** and observe what happens to the temperature curve.
+
+**Predict → Run → Observe → Compare**
+
+**[Open the Cooling Lab](simulations/cooling/index.html)**
