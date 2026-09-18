@@ -220,3 +220,19 @@ Change **T₀**, **Tₐ**, and **τ** and observe what happens to the temperatur
 **Predict → Run → Observe → Compare**
 
 **[Open the Cooling Lab](simulations/cooling/index.html)**
+
+## 11. One Idea, Many Systems
+
+The same mathematical idea appears in very different physical systems.
+
+### Thermal System — Cooling
+
+![A hot cup cooling toward ambient temperature, with its temperature response graph](assets/diagrams/one-idea-cooling.svg)
+
+**Differential equation**
+
+**dT/dt = -(1/τ)(T - Tₐ)**
+
+**Solution**
+
+**T(t) = Tₐ + (T₀ - Tₐ)e^(-t/τ)**
