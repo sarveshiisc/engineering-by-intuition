@@ -115,6 +115,8 @@ Therefore, even without solving the equation, we can predict the **nature of the
 
 **Steep at first → gradually less steep → almost flat near the surrounding temperature**
 
+![Cooling curve intuition: as the temperature difference decreases, the cooling slope becomes gentler](assets/diagrams/cooling-curve-intuition.svg)
+
 This does not tell us the exact mathematical shape of the curve. It tells us what kind of behavior we should expect from the physical relationship:
 
 **dT/dt = -k(T - Tₐ)**
