@@ -87,7 +87,41 @@ This relationship is known as **Newton's law of cooling**.
 
 This is a **differential equation** because it relates a quantity **T** to its rate of change **dT/dt**.
 
-## 5. Can We Predict the Future?
+## 5. What Should the Curve Look Like?
+
+Before solving the equation, can we predict the **nature of the curve**?
+
+We know that the rate of cooling depends on the temperature difference between the tea and its surroundings.
+
+At the beginning, this temperature difference is large.
+
+**Large temperature difference → large rate of cooling**
+
+So the temperature should fall quickly.
+
+As the tea cools, the temperature difference becomes smaller.
+
+**Smaller temperature difference → smaller rate of cooling**
+
+So the temperature should now fall more slowly.
+
+As the tea gets closer and closer to the surrounding temperature, the difference becomes very small.
+
+**Very small temperature difference → very small rate of cooling**
+
+So the curve should gradually flatten as it approaches the surrounding temperature.
+
+Therefore, even without solving the equation, we can predict the **nature of the response**:
+
+**Steep at first → gradually less steep → almost flat near the surrounding temperature**
+
+This does not tell us the exact mathematical shape of the curve. It tells us what kind of behavior we should expect from the physical relationship:
+
+**dT/dt = -k(T - Tₐ)**
+
+Now we can ask a more precise question: **Can we predict the exact temperature at any future time t?**
+
+## 6. Can We Predict the Future?
 
 We now have a differential equation that describes how the tea temperature changes:
 
@@ -104,7 +138,7 @@ That means we can use it to answer questions like:
 
 This is where a differential equation becomes a **prediction tool**.
 
-## 6. Solving the Differential Equation
+## 7. Solving the Differential Equation
 
 Starting with:
 
@@ -136,7 +170,7 @@ For example, if we know the initial temperature, room temperature, and cooling c
 
 This is the first payoff of the differential equation: **we started with an observation about how things change and arrived at an equation that can predict their future behavior.**
 
-## 7. What Does Each Term Tell Us?
+## 8. What Does Each Term Tell Us?
 
 The equation is:
 
@@ -150,7 +184,7 @@ The value of **k** depends on the physical conditions of the system, such as exp
 
 So **k is not a universal constant**. It represents the combined effect of these physical factors for a particular setup.
 
-## 8. What Does the Equation Tell Us?
+## 9. What Does the Equation Tell Us?
 
 The equation gives us more than the temperature at a particular time.
 
