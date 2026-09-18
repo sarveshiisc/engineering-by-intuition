@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">Cooling curve intuition</title>
+  <desc id="desc">A smooth cooling curve descends toward an ambient temperature line. Three points show decreasing temperature differences and progressively flatter tangent slopes.</desc>
+  <defs>
+    <marker id="axis-arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0 0L9 4.5L0 9Z" fill="#18504e"/>
+    </marker>
+    <marker id="difference-arrow" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto-start-reverse">
+      <path d="M0 4.5L9 0L9 9Z" fill="#e4773e"/>
+    </marker>
+    <style>
+      .axis { stroke:#18504e; stroke-width:3; stroke-linecap:round; }
+      .ambient { stroke:#718482; stroke-width:2.5; stroke-dasharray:9 10; }
+      .curve { fill:none; stroke:#15949a; stroke-width:7; stroke-linecap:round; stroke-linejoin:round; }
+      .tangent { stroke:#ed7940; stroke-width:4; stroke-linecap:round; }
+      .difference { stroke:#ed7940; stroke-width:2.5; stroke-linecap:round; marker-start:url(#difference-arrow); marker-end:url(#difference-arrow); }
+      .point { fill:#111517; stroke:#15949a; stroke-width:4; }
+      .axis-label { fill:#15949a; font:600 21px Arial, sans-serif; }
+      .ambient-label { fill:#718482; font:18px Arial, sans-serif; }
+      .orange-label { fill:#ed7940; font:600 18px Arial, sans-serif; }
+      .callout { fill:#171d20; stroke:#81452f; stroke-width:1.5; }
+      .callout-title { fill:#ed7940; font:600 18px Arial, sans-serif; text-anchor:middle; }
+      .callout-detail { fill:#d98a63; font:italic 16px Georgia, serif; text-anchor:middle; }
+    </style>
+  </defs>
+
+  <rect width="900" height="560" fill="#111517"/>
+
+  <line class="axis" x1="105" y1="470" x2="810" y2="470" marker-end="url(#axis-arrow)"/>
+  <line class="axis" x1="105" y1="470" x2="105" y2="65" marker-end="url(#axis-arrow)"/>
+  <text class="axis-label" x="70" y="83">T</text>
+  <text class="axis-label" x="815" y="505">t</text>
+
+  <line class="ambient" x1="105" y1="405" x2="810" y2="405"/>
+  <text class="ambient-label" x="126" y="438">Ambient temperature Tₐ</text>
+
+  <path class="curve" d="M125 115 C210 128 245 175 315 235 C390 298 465 340 555 367 C640 393 710 401 790 405"/>
+
+  <line class="tangent" x1="210" y1="140" x2="300" y2="230"/>
+  <line class="tangent" x1="420" y1="294" x2="514" y2="352"/>
+  <line class="tangent" x1="645" y1="389" x2="729" y2="397"/>
+
+  <circle class="point" cx="255" cy="185" r="8"/>
+  <circle class="point" cx="467" cy="323" r="8"/>
+  <circle class="point" cx="687" cy="393" r="8"/>
+
+  <line class="difference" x1="255" y1="185" x2="255" y2="405"/>
+  <line class="difference" x1="467" y1="323" x2="467" y2="405"/>
+  <line class="difference" x1="687" y1="393" x2="687" y2="405"/>
+
+  <text class="orange-label" x="145" y="270">Large T − Tₐ</text>
+  <text class="orange-label" x="485" y="370">Smaller T − Tₐ</text>
+  <text class="orange-label" x="699" y="435">T − Tₐ ≈ 0</text>
+
+  <rect class="callout" x="138" y="58" width="172" height="84" rx="5"/>
+  <text class="callout-title" x="224" y="86">Steep slope</text>
+  <text class="callout-detail" x="224" y="110">(dT/dt is large</text>
+  <text class="callout-detail" x="224" y="128">and negative)</text>
+
+  <rect class="callout" x="415" y="208" width="190" height="84" rx="5"/>
+  <text class="callout-title" x="510" y="236">Gentler slope</text>
+  <text class="callout-detail" x="510" y="260">(dT/dt is smaller</text>
+  <text class="callout-detail" x="510" y="278">in magnitude)</text>
+
+  <rect class="callout" x="620" y="304" width="160" height="70" rx="5"/>
+  <text class="callout-title" x="700" y="332">Slope ≈ 0</text>
+  <text class="callout-detail" x="700" y="356">(dT/dt ≈ 0)</text>
+</svg>
