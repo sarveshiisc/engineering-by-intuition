@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" role="img" aria-labelledby="title desc">
+<title id="title">Cooling thermal system</title>
+<desc id="desc">A hot cup exchanges heat with cooler surroundings, alongside a temperature response curve approaching ambient temperature.</desc>
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#e4773e"/></marker>
+  <style>
+    .label{font:600 22px Arial,sans-serif;fill:#e8f1f0}.small{font:18px Arial,sans-serif;fill:#9fb3b1}
+    .axis{stroke:#718482;stroke-width:2}.curve{fill:none;stroke:#15949a;stroke-width:6;stroke-linecap:round}
+    .ambient{stroke:#718482;stroke-width:2;stroke-dasharray:8 8}.heat{stroke:#e4773e;stroke-width:3;fill:none;marker-end:url(#arrow)}
+  </style>
+</defs>
+<rect width="1000" height="360" rx="18" fill="#111517"/>
+<text class="label" x="55" y="48">Thermal system — cooling</text>
+<!-- cup -->
+<path d="M120 145 h180 l-18 120 q-3 25-28 25 h-88 q-25 0-28-25z" fill="#202a2d" stroke="#15949a" stroke-width="4"/>
+<path d="M299 172 q72 0 72 48 q0 48-78 43" fill="none" stroke="#15949a" stroke-width="4"/>
+<path d="M166 126 q-18-30 4-52 M215 126 q-18-30 4-52 M264 126 q-18-30 4-52" class="heat"/>
+<text class="small" x="145" y="325">Hot tea</text>
+<text class="small" x="310" y="98">Heat to surroundings</text>
+<!-- graph -->
+<line class="axis" x1="535" y1="290" x2="930" y2="290"/>
+<line class="axis" x1="535" y1="290" x2="535" y2="75"/>
+<text class="small" x="515" y="72">T</text><text class="small" x="935" y="300">t</text>
+<line class="ambient" x1="535" y1="245" x2="930" y2="245"/>
+<text class="small" x="810" y="270">Tₐ</text>
+<path class="curve" d="M555 95 C635 105 665 160 725 195 C790 232 850 241 915 244"/>
+<circle cx="555" cy="95" r="6" fill="#15949a"/>
+<text class="small" x="570" y="92">T₀</text>
+<text class="label" x="650" y="48">Temperature response</text>
+</svg>
