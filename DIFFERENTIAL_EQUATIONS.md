@@ -141,6 +141,12 @@ That means we need to **solve the differential equation**.
 
 ## 7. Solving the Differential Equation
 
+The differential equation tells us the **rule by which the temperature changes**.
+
+But we want to know the temperature itself at any future time. So we need to find the function **T(t)** that follows this rule.
+
+That is what it means to **solve the differential equation**.
+
 Starting with:
 
 **dT/dt = -k(T - Tₐ)**
