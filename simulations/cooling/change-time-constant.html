@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cooling Experiment 1 | Engineering by Intuition</title>
+  <style>
+    :root {
+      --ink: #183331;
+      --muted: #627775;
+      --paper: #f6f2e9;
+      --panel: #fffdf8;
+      --line: #d7dfd7;
+      --teal: #16858a;
+      --teal-dark: #0c6269;
+      --orange: #e4773e;
+      --orange-light: #f5b184;
+      --amber: #e8b447;
+      --shadow: 0 16px 35px rgba(35, 69, 64, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 92% 5%, rgba(232, 180, 71, 0.18), transparent 25rem),
+        linear-gradient(135deg, #f8f5ed 0%, #eef5ef 100%);
+      font-family: Georgia, 'Times New Roman', serif;
+      min-height: 100vh;
+    }
+
+    .page { max-width: 1180px; margin: 0 auto; padding: 32px 24px 44px; }
+    .eyebrow { color: var(--teal-dark); font: 700 0.78rem/1.2 Arial, sans-serif; letter-spacing: 0.13em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 680px; margin-bottom: 14px; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 0.98; letter-spacing: -0.04em; font-weight: 500; }
+    .intro { max-width: 650px; margin-bottom: 24px; color: var(--muted); font-size: 1.12rem; line-height: 1.55; }
+
+    .experiment { display: grid; grid-template-columns: minmax(280px, 0.8fr) minmax(520px, 1.2fr); grid-template-areas: "controls visuals" "controls graph"; gap: 18px 24px; align-items: start; }
+    .controls, .visuals, .graph-panel { background: rgba(255, 253, 248, 0.9); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); }
+    .controls { grid-area: controls; padding: 25px; }
+    .controls h2 { font-size: 1.55rem; font-weight: 500; margin-bottom: 10px; }
+    .question { margin-bottom: 23px; font-size: 1.25rem; line-height: 1.35; }
+    fieldset { border: 0; padding: 0; margin: 0 0 25px; }
+    legend { margin-bottom: 12px; font: 700 0.75rem/1.2 Arial, sans-serif; letter-spacing: 0.11em; text-transform: uppercase; color: var(--muted); }
+    .choice { display: flex; gap: 10px; align-items: center; padding: 10px 0; font: 0.98rem Arial, sans-serif; cursor: pointer; }
+    .choice.selected { color: var(--teal-dark); font-weight: 700; }
+    .choice input { accent-color: var(--teal); width: 17px; height: 17px; }
+    .cases { display: grid; gap: 10px; margin-bottom: 24px; }
+    .case { border: 1px solid var(--line); border-left: 5px solid var(--teal); border-radius: 8px; padding: 13px 14px; background: #f9fbf6; }
+    .case.b { border-left-color: var(--orange); }
+    .case-label { display: flex; justify-content: space-between; font: 700 0.78rem Arial, sans-serif; letter-spacing: 0.09em; text-transform: uppercase; }
+    .case-values { margin-top: 7px; color: var(--muted); font: 0.92rem/1.5 Arial, sans-serif; }
+    .tau { font-weight: 700; color: var(--ink); font-family: "Cambria Math", "STIX Two Math", "Times New Roman", serif; }
+    .tau-symbol { font-family: "Cambria Math", "STIX Two Math", "Times New Roman", serif; font-style: normal; }
+    button { border: 0; border-radius: 7px; cursor: pointer; font: 700 0.92rem Arial, sans-serif; }
+    .run { width: 100%; padding: 14px 18px; background: var(--teal-dark); color: white; transition: transform .2s, background .2s; }
+    .run:hover, .run:focus-visible { background: #084f55; transform: translateY(-1px); }
+    .secondary { padding: 9px 14px; color: var(--ink); background: #e9efea; }
+    .secondary:hover, .secondary:focus-visible { background: #dce8df; }
+    .button-row { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 9px; }
+    .status { min-height: 43px; margin: 17px 0 0; color: var(--muted); font: 0.89rem/1.4 Arial, sans-serif; }
+    .status strong { color: var(--teal-dark); }
+    .status.result { min-height: 0; padding: 11px 12px; border-left: 4px solid var(--teal); border-radius: 5px; background: #e7f2e9; color: #174b4a; }
+    .status.result strong { color: inherit; }
+    .status.result.incorrect { border-left-color: var(--orange); background: #fff0e5; color: #8a4b2b; }
+
+    .visuals { grid-area: visuals; padding: 17px; }
+    .visual-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 13px; }
+    .visual-head h2 { margin: 0; font-size: 1.35rem; font-weight: 500; }
+    .clock { color: var(--muted); font: 700 0.8rem Arial, sans-serif; }
+    .cups { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .cup-card { --case-color: var(--teal); position: relative; min-width: 0; padding: 16px 14px 14px; overflow: hidden; border-radius: 10px; background: #f0f5ee; border: 1px solid #d9e4d9; }
+    .cup-card.b { --case-color: var(--orange); background: #fbf1ea; border-color: #eed9ca; }
+    .cup-title { position: relative; z-index: 2; display: flex; justify-content: space-between; font: 700 0.78rem Arial, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
+    .cup-title .marker { width: 9px; height: 9px; margin-top: 3px; border-radius: 50%; background: var(--teal); }
+    .cup-card.b .marker { background: var(--orange); }
+    .cup-stage { height: 176px; position: relative; display: flex; justify-content: center; align-items: end; padding-bottom: 8px; }
+    .steam { position: absolute; top: 26px; width: 82px; height: 72px; opacity: .74; filter: blur(.3px); transition: opacity .3s; }
+    .steam i { position: absolute; display: block; width: 15px; height: 58px; border-left: 3px solid rgba(255,255,255,.85); border-radius: 50%; animation: drift 2.8s ease-in-out infinite; }
+    .steam i:nth-child(1) { left: 11px; animation-delay: -.6s; }
+    .steam i:nth-child(2) { left: 34px; animation-delay: -.1s; }
+    .steam i:nth-child(3) { left: 57px; animation-delay: -.9s; }
+    @keyframes drift { 0%, 100% { transform: translateY(8px) rotate(5deg); opacity: 0; } 35%, 70% { opacity: .8; } 50% { transform: translateY(-9px) rotate(-5deg); } }
+    .cup { position: relative; width: 126px; height: 105px; border: 5px solid #c6d3c7; border-top: 0; border-radius: 5px 5px 34px 34px; background: #fffdf8; overflow: hidden; box-shadow: inset 0 -8px 0 rgba(255,255,255,.7); }
+    .cup:before { content: ''; position: absolute; z-index: 2; left: -5px; top: -5px; width: 126px; height: 24px; border: 5px solid #c6d3c7; border-radius: 50%; background: rgba(255,255,255,.45); }
+    .cup:after { content: ''; position: absolute; right: -30px; top: 27px; width: 38px; height: 43px; border: 5px solid #c6d3c7; border-left: 0; border-radius: 0 24px 24px 0; }
+    .tea { position: absolute; z-index: 1; bottom: 0; left: 0; width: 100%; height: 88%; background: var(--case-color); transition: height .15s linear; }
+    .tea-sheen { position: absolute; z-index: 3; top: 15px; left: 13px; width: 74px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.22); }
+    .thermometer { position: absolute; z-index: 4; right: 22px; bottom: 15px; width: 18px; height: 139px; border: 3px solid #849b96; border-radius: 12px; background: #f9fbf3; box-shadow: 0 2px 0 rgba(24,51,49,.08); }
+    .thermometer:after { content: ''; position: absolute; left: 3px; bottom: -13px; width: 6px; height: 20px; border-radius: 5px; background: var(--teal); }
+    .cup-card.b .thermometer:after { background: var(--orange); }
+    .thermo-level { position: absolute; bottom: 7px; left: 4px; width: 4px; height: 110px; border-radius: 5px; background: var(--teal); transform-origin: bottom; transition: transform .15s linear; }
+    .cup-card.b .thermo-level { background: var(--orange); }
+    .temp-row { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid rgba(98,119,117,.22); padding-top: 10px; }
+    .temp { font-size: 1.7rem; font-weight: 500; }
+    .temp small { font-size: .8em; }
+    .temp-note { color: var(--muted); font: .73rem Arial, sans-serif; }
+
+    .graph-panel { grid-area: graph; padding: 17px 19px 15px; }
+    .graph-heading { display: flex; justify-content: space-between; align-items: start; gap: 14px; margin-bottom: 10px; }
+    .graph-heading h2 { margin: 0; font-size: 1.5rem; font-weight: 500; }
+    .legend { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 13px; color: var(--muted); font: .76rem Arial, sans-serif; }
+    .legend span { display: inline-flex; gap: 6px; align-items: center; }
+    .swatch { width: 18px; height: 3px; border-radius: 2px; background: var(--teal); }
+    .swatch.orange { background: var(--orange); }
+    .swatch.dashed { height: 0; border-top: 2px dashed #9ba9a2; background: transparent; }
+    .graph-wrap { position: relative; width: 100%; height: min(42vw, 320px); min-height: 240px; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .graph-note { margin: 5px 0 0; color: var(--muted); font: .8rem Arial, sans-serif; }
+    .takeaway { display: none; margin: 16px 0 0; padding: 13px 15px; color: #174b4a; background: #e7f2e9; border-left: 4px solid var(--teal); border-radius: 5px; font: .95rem/1.45 Arial, sans-serif; }
+    .takeaway.visible { display: block; animation: reveal .5s ease both; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+    @media (max-width: 800px) {
+      .page { padding: 30px 15px 42px; }
+      .experiment { grid-template-columns: 1fr; grid-template-areas: "controls" "visuals" "graph"; }
+      .graph-panel { grid-column: auto; }
+      .visuals { order: 2; }
+      .graph-panel { order: 3; }
+      .graph-wrap { height: 70vw; }
+    }
+    @media (max-width: 430px) {
+      h1 { font-size: 2.7rem; }
+      .controls, .visuals, .graph-panel { padding: 17px; }
+      .cup-stage { height: 174px; }
+      .cup { transform: scale(.88); transform-origin: bottom center; }
+      .thermometer { right: 10px; }
+      .graph-heading { display: block; }
+      .legend { justify-content: flex-start; margin-top: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="eyebrow">Experiment 1 / Change <span class="tau-symbol">&tau;</span></div>
+      <h1>Which tea cools faster?</h1>
+      <p class="intro">Two identical cups start hot. The only difference is their time constant. Make a prediction, then watch the evidence appear on one graph.</p>
+    </header>
+
+    <section class="experiment" aria-label="Cooling comparison experiment">
+      <aside class="controls">
+        <h2>Before you run it</h2>
+        <p class="question"><strong>Which tea do you think will cool faster?</strong></p>
+        <fieldset>
+          <legend>Make a prediction</legend>
+          <label class="choice"><input type="radio" name="prediction" value="a"> Case A &mdash; <span class="tau-symbol">&tau;</span> = 2 min</label>
+          <label class="choice"><input type="radio" name="prediction" value="b"> Case B &mdash; <span class="tau-symbol">&tau;</span> = 5 min</label>
+          <label class="choice"><input type="radio" name="prediction" value="same"> They will cool at the same rate</label>
+        </fieldset>
+
+        <div class="cases" aria-label="Experiment cases">
+          <div class="case">
+            <div class="case-label"><span>Case A</span><span class="tau"><span class="tau-symbol">&tau;</span> = 2 min</span></div>
+            <div class="case-values">T<sub>0</sub> = 80&deg;C &nbsp;&middot;&nbsp; T<sub>a</sub> = 25&deg;C</div>
+          </div>
+          <div class="case b">
+            <div class="case-label"><span>Case B</span><span class="tau"><span class="tau-symbol">&tau;</span> = 5 min</span></div>
+            <div class="case-values">T<sub>0</sub> = 80&deg;C &nbsp;&middot;&nbsp; T<sub>a</sub> = 25&deg;C</div>
+          </div>
+        </div>
+
+        <button class="run" id="runButton" type="button">&#9654; Run Comparison</button>
+        <div class="button-row">
+          <button class="secondary" id="pauseButton" type="button" disabled>Pause</button>
+          <button class="secondary" id="resetButton" type="button">Reset</button>
+        </div>
+        <p class="status" id="status" aria-live="polite">Your prediction will not affect the experiment.</p>
+      </aside>
+
+      <section class="visuals" aria-label="Live tea temperatures">
+        <div class="visual-head">
+          <h2>Watch the tea cool</h2>
+          <div class="clock" id="clock">Elapsed time: 0.0 min</div>
+        </div>
+        <div class="cups">
+          <article class="cup-card" aria-label="Case A tea">
+            <div class="cup-title"><span>Case A</span><span class="marker"></span></div>
+            <div class="cup-stage">
+              <div class="steam" id="steamA" aria-hidden="true"><i></i><i></i><i></i></div>
+              <div class="cup"><div class="tea" id="teaA"><div class="tea-sheen"></div></div></div>
+              <div class="thermometer" aria-hidden="true"><div class="thermo-level" id="thermoA"></div></div>
+            </div>
+            <div class="temp-row"><div class="temp" id="tempA">80.0<small>&deg;C</small></div><div class="temp-note"><span class="tau-symbol">&tau;</span> = 2 min</div></div>
+          </article>
+          <article class="cup-card b" aria-label="Case B tea">
+            <div class="cup-title"><span>Case B</span><span class="marker"></span></div>
+            <div class="cup-stage">
+              <div class="steam" id="steamB" aria-hidden="true"><i></i><i></i><i></i></div>
+              <div class="cup"><div class="tea" id="teaB"><div class="tea-sheen"></div></div></div>
+              <div class="thermometer" aria-hidden="true"><div class="thermo-level" id="thermoB"></div></div>
+            </div>
+            <div class="temp-row"><div class="temp" id="tempB">80.0<small>&deg;C</small></div><div class="temp-note"><span class="tau-symbol">&tau;</span> = 5 min</div></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="graph-panel" aria-label="Temperature versus time graph">
+        <div class="graph-heading">
+          <h2>Temperature vs. time</h2>
+          <div class="legend" aria-label="Graph legend">
+            <span><i class="swatch"></i> Case A (<span class="tau-symbol">&tau;</span> = 2)</span>
+            <span><i class="swatch orange"></i> Case B (<span class="tau-symbol">&tau;</span> = 5)</span>
+            <span><i class="swatch dashed"></i> Room temperature</span>
+          </div>
+        </div>
+        <div class="graph-wrap"><canvas id="graph" aria-label="Live graph comparing the temperatures of Case A and Case B"></canvas></div>
+        <p class="graph-note">The curves show the same model as the cups. Both approach the steady-state temperature T<sub>a</sub> = 25&deg;C.</p>
+        <p class="takeaway" id="takeaway"><strong>What did you notice?</strong><br>The smaller time constant produced the faster response.</p>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const T0 = 80;
+      const Ta = 25;
+      const cases = { a: { tau: 2, color: '#16858a' }, b: { tau: 5, color: '#e4773e' } };
+      const runDuration = 15;
+      const timeScale = 12000 / runDuration;
+      let elapsed = 0;
+      let running = false;
+      let paused = false;
+      let lastFrame = 0;
+      let animationFrame;
+
+      const elements = {
+        graph: document.getElementById('graph'),
+        run: document.getElementById('runButton'),
+        pause: document.getElementById('pauseButton'),
+        reset: document.getElementById('resetButton'),
+        clock: document.getElementById('clock'),
+        status: document.getElementById('status'),
+        takeaway: document.getElementById('takeaway'),
+        tempA: document.getElementById('tempA'),
+        tempB: document.getElementById('tempB'),
+        teaA: document.getElementById('teaA'),
+        teaB: document.getElementById('teaB'),
+        thermoA: document.getElementById('thermoA'),
+        thermoB: document.getElementById('thermoB'),
+        steamA: document.getElementById('steamA'),
+        steamB: document.getElementById('steamB')
+      };
+      const predictionChoices = [...document.querySelectorAll('input[name="prediction"]')];
+
+      function temperature(time, tau) {
+        return Ta + (T0 - Ta) * Math.exp(-time / tau);
+      }
+
+      function setLiveValue(id, value) {
+        elements[id].innerHTML = value.toFixed(1) + '<small>&deg;C</small>';
+      }
+
+      function updateTea(id, temperatureValue) {
+        const fraction = Math.max(0, Math.min(1, (temperatureValue - Ta) / (T0 - Ta)));
+        elements['tea' + id].style.height = (10 + fraction * 78) + '%';
+        elements['thermo' + id].style.transform = 'scaleY(' + (0.12 + fraction * 0.88) + ')';
+        elements['steam' + id].style.opacity = (0.08 + fraction * 0.66).toFixed(2);
+      }
+
+      function updateDisplay() {
+        const tempA = temperature(elapsed, cases.a.tau);
+        const tempB = temperature(elapsed, cases.b.tau);
+        setLiveValue('tempA', tempA);
+        setLiveValue('tempB', tempB);
+        updateTea('A', tempA);
+        updateTea('B', tempB);
+        elements.clock.textContent = 'Elapsed time: ' + elapsed.toFixed(1) + ' min';
+        drawGraph();
+      }
+
+      function drawGraph() {
+        const canvas = elements.graph;
+        const context = canvas.getContext('2d');
+        const ratio = window.devicePixelRatio || 1;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        canvas.width = width * ratio;
+        canvas.height = height * ratio;
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+        const plot = { left: 54, right: width - 18, top: 15, bottom: height - 43 };
+        const x = time => plot.left + (time / runDuration) * (plot.right - plot.left);
+        const y = temp => plot.bottom - ((temp - Ta) / (T0 - Ta)) * (plot.bottom - plot.top);
+
+        context.clearRect(0, 0, width, height);
+        context.font = '12px Arial';
+        context.lineWidth = 1;
+        context.strokeStyle = '#dbe3dc';
+        context.fillStyle = '#657873';
+        context.textAlign = 'right';
+        [25, 40, 55, 70, 80].forEach(value => {
+          context.beginPath(); context.moveTo(plot.left, y(value)); context.lineTo(plot.right, y(value)); context.stroke();
+          context.fillText(value + '°', plot.left - 9, y(value) + 4);
+        });
+        context.textAlign = 'center';
+        [0, 3, 6, 9, 12, 15].forEach(value => {
+          context.fillText(value, x(value), plot.bottom + 21);
+          context.beginPath(); context.moveTo(x(value), plot.bottom); context.lineTo(x(value), plot.bottom + 5); context.stroke();
+        });
+        context.fillText('Time, t (min)', (plot.left + plot.right) / 2, height - 7);
+        context.save(); context.translate(14, (plot.top + plot.bottom) / 2); context.rotate(-Math.PI / 2); context.fillText('Temperature, T (°C)', 0, 0); context.restore();
+
+        context.setLineDash([6, 5]); context.strokeStyle = '#9ba9a2'; context.beginPath(); context.moveTo(plot.left, y(Ta)); context.lineTo(plot.right, y(Ta)); context.stroke(); context.setLineDash([]);
+        [['a', cases.a.color], ['b', cases.b.color]].forEach(([key, color]) => {
+          context.strokeStyle = color; context.lineWidth = 3; context.lineJoin = 'round'; context.beginPath();
+          const end = Math.min(elapsed, runDuration);
+          for (let time = 0; time <= end; time += 0.1) {
+            const px = x(time); const py = y(temperature(time, cases[key].tau));
+            if (time === 0) context.moveTo(px, py); else context.lineTo(px, py);
+          }
+          context.stroke();
+          if (running || elapsed > 0) { context.fillStyle = color; context.beginPath(); context.arc(x(end), y(temperature(end, cases[key].tau)), 4, 0, Math.PI * 2); context.fill(); }
+        });
+        if (running || elapsed > 0) { context.strokeStyle = '#183331'; context.lineWidth = 1; context.setLineDash([3, 4]); context.beginPath(); context.moveTo(x(elapsed), plot.top); context.lineTo(x(elapsed), plot.bottom); context.stroke(); context.setLineDash([]); }
+      }
+
+      function finish() {
+        running = false; paused = false; elapsed = runDuration;
+        elements.pause.disabled = true; elements.pause.textContent = 'Pause';
+        elements.run.disabled = false; elements.run.innerHTML = '&#9654; Run Again';
+        const prediction = predictionChoices.find(choice => choice.checked);
+        if (!prediction) {
+          elements.status.className = 'status result';
+          elements.status.innerHTML = '<strong>Comparison complete.</strong> Look at the slopes and where each curve is at the same time.';
+        } else if (prediction.value === 'a') {
+          elements.status.className = 'status result';
+          elements.status.innerHTML = '<strong>Correct prediction.</strong> Case A, with the smaller &tau;, cools faster.';
+        } else {
+          elements.status.className = 'status result incorrect';
+          elements.status.innerHTML = '<strong>Not quite.</strong> Case A, with &tau; = 2 min, cools faster. Look at the graph to compare the slopes.';
+        }
+        elements.takeaway.classList.add('visible');
+        updateDisplay();
+      }
+
+      function frame(timestamp) {
+        if (!running) return;
+        if (!paused) {
+          if (!lastFrame) lastFrame = timestamp;
+          elapsed += (timestamp - lastFrame) / timeScale;
+          lastFrame = timestamp;
+          if (elapsed >= runDuration) { finish(); return; }
+          updateDisplay();
+        } else { lastFrame = timestamp; }
+        animationFrame = requestAnimationFrame(frame);
+      }
+
+      function start() {
+        cancelAnimationFrame(animationFrame);
+        elapsed = 0; running = true; paused = false; lastFrame = 0;
+        elements.pause.disabled = false; elements.pause.textContent = 'Pause';
+        elements.run.disabled = true; elements.takeaway.classList.remove('visible');
+        elements.status.className = 'status';
+        elements.status.textContent = 'Both cups are cooling from 80°C. Watch the faster response unfold.';
+        updateDisplay();
+        animationFrame = requestAnimationFrame(frame);
+      }
+
+      function reset() {
+        cancelAnimationFrame(animationFrame);
+        elapsed = 0; running = false; paused = false;
+        elements.pause.disabled = true; elements.pause.textContent = 'Pause';
+        elements.run.disabled = false; elements.run.innerHTML = '&#9654; Run Comparison';
+        elements.status.className = 'status';
+        elements.status.textContent = 'Your prediction will not affect the experiment.';
+        elements.takeaway.classList.remove('visible');
+        updateDisplay();
+      }
+
+      elements.run.addEventListener('click', start);
+      elements.reset.addEventListener('click', reset);
+      predictionChoices.forEach(choice => {
+        choice.addEventListener('change', () => {
+          predictionChoices.forEach(currentChoice => currentChoice.closest('.choice').classList.toggle('selected', currentChoice.checked));
+        });
+      });
+      elements.pause.addEventListener('click', () => {
+        if (!running) return;
+        paused = !paused;
+        elements.pause.textContent = paused ? 'Resume' : 'Pause';
+        elements.status.textContent = paused ? 'Experiment paused. Resume when you are ready.' : 'Both cups are cooling from 80°C. Watch the faster response unfold.';
+      });
+      window.addEventListener('resize', drawGraph);
+      updateDisplay();
+    })();
+  </script>
+</body>
+</html>
