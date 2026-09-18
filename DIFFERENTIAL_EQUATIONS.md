@@ -253,3 +253,124 @@ Eventually, the tea temperature approaches the surrounding temperature.
 **Solution**
 
 **T(t) = Tₐ + (T₀ - Tₐ)e^(-t/τ)**
+
+### Electrical System — RC Charging
+
+#### What is happening?
+
+A capacitor is initially uncharged.
+
+At **t = 0**, the switch is closed and the capacitor begins to charge through the resistor.
+
+Initially, the difference between the supply voltage and capacitor voltage is large, so the current is large and the capacitor voltage rises quickly.
+
+As the capacitor charges, this difference becomes smaller. The current decreases and the voltage rises more slowly.
+
+Eventually, the capacitor voltage approaches the supply voltage.
+
+![An RC circuit charging after a switch is closed, with capacitor voltage approaching the supply voltage](assets/diagrams/one-idea-rc.svg)
+
+**Differential equation**
+
+**dV/dt = (1/RC)(Vₛ - V)**
+
+**Terms**
+
+- **V(t)** — capacitor voltage at time **t**
+- **Vₛ** — supply voltage and final capacitor voltage
+- **V₀** — initial capacitor voltage
+- **R** — resistance
+- **C** — capacitance
+- **τ = RC** — electrical time constant
+
+**Solution**
+
+**V(t) = Vₛ + (V₀ - Vₛ)e^(-t/RC)**
+
+For an initially uncharged capacitor, **V₀ = 0**:
+
+**V(t) = Vₛ(1 - e^(-t/RC))**
+
+### Mechanical System — Falling with Linear Air Resistance
+
+#### What is happening?
+
+An object is released from rest and begins to fall.
+
+At first its speed is small, so air resistance is small and gravity causes it to accelerate quickly.
+
+As its speed increases, air resistance increases and the acceleration becomes smaller.
+
+Eventually, air resistance balances gravity. The acceleration becomes zero and the object approaches a constant **terminal velocity**.
+
+![A falling object with gravity and linear air resistance, with velocity approaching terminal velocity](assets/diagrams/one-idea-terminal-velocity.svg)
+
+**Differential equation**
+
+**m dv/dt = mg - bv**
+
+or
+
+**dv/dt = (b/m)(v∞ - v)**
+
+where **v∞ = mg/b**.
+
+**Terms**
+
+- **v(t)** — downward velocity at time **t**
+- **v∞** — terminal velocity
+- **m** — mass of the object
+- **g** — acceleration due to gravity
+- **b** — linear drag coefficient
+- **τ = m/b** — mechanical time constant
+
+**Solution**
+
+**v(t) = v∞ + (v₀ - v∞)e^(-t/τ)**
+
+For an object released from rest, **v₀ = 0**:
+
+**v(t) = v∞(1 - e^(-t/τ))**
+
+### Chemical System — First-Order Reaction
+
+#### What is happening?
+
+Consider a reaction in which a reactant **A** is converted into products.
+
+For a first-order reaction, the rate at which **A** disappears is proportional to how much of **A** is present.
+
+Initially, the concentration is high, so it decreases quickly.
+
+As the reactant is consumed, its concentration becomes smaller and the reaction slows down.
+
+![A first-order chemical reaction with reactant concentration decreasing with time](assets/diagrams/one-idea-chemical.svg)
+
+**Differential equation**
+
+**dC/dt = -kC**
+
+**Terms**
+
+- **C(t)** — concentration of reactant **A** at time **t**
+- **C₀** — initial concentration
+- **k** — first-order reaction rate constant
+- **τ = 1/k** — time constant
+
+**Solution**
+
+**C(t) = C₀e^(-kt) = C₀e^(-t/τ)**
+
+### Different Systems. Same Mathematical Structure.
+
+The physical quantities are different — temperature, voltage, velocity, and concentration.
+
+But look past the symbols. Each system follows the same first-order pattern:
+
+**dx/dt = -(1/τ)(x - x∞)**
+
+and therefore has the same form of solution:
+
+**x(t) = x∞ + (x₀ - x∞)e^(-t/τ)**
+
+Different physics. **Same mathematical structure.**
