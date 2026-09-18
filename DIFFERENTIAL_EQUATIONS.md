@@ -125,20 +125,19 @@ Now we can ask a more precise question: **Can we predict the exact temperature a
 
 ## 6. Can We Predict the Future?
 
-We now have a differential equation that describes how the tea temperature changes:
+From intuition, we could predict the **nature of the curve**.
 
-**dT/dt = -k(T - Tₐ)**
+But that is not enough to answer questions like:
 
-The next step is to **solve this equation**.
-
-Solving it gives us a mathematical expression for **T as a function of time t**.
-
-That means we can use it to answer questions like:
 - What will the temperature be after 5 minutes?
 - After 10 minutes?
 - How long will it take to reach a certain temperature?
 
-This is where a differential equation becomes a **prediction tool**.
+For that, we need more than the shape of the curve.
+
+We need to find **T as a function of time t**.
+
+That means we need to **solve the differential equation**.
 
 ## 7. Solving the Differential Equation
 
