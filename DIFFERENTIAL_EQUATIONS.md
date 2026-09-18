@@ -237,7 +237,7 @@ As the tea cools, this temperature difference becomes smaller, so the rate of co
 
 Eventually, the tea temperature approaches the surrounding temperature.
 
-![A hot cup cooling toward ambient temperature, with its temperature response graph](assets/diagrams/one-idea-cooling.svg)
+<img src="assets/diagrams/one-idea-cooling.svg" alt="A hot cup cooling toward ambient temperature, with its temperature response graph" width="760">
 
 **Differential equation**
 
@@ -268,7 +268,7 @@ As the capacitor charges, this difference becomes smaller. The current decreases
 
 Eventually, the capacitor voltage approaches the supply voltage.
 
-![An RC circuit charging after a switch is closed, with capacitor voltage approaching the supply voltage](assets/diagrams/one-idea-rc.svg)
+<img src="assets/diagrams/one-idea-rc.svg" alt="An RC circuit charging after a switch is closed, with capacitor voltage approaching the supply voltage" width="760">
 
 **Differential equation**
 
@@ -303,7 +303,7 @@ As its speed increases, air resistance increases and the acceleration becomes sm
 
 Eventually, air resistance balances gravity. The acceleration becomes zero and the object approaches a constant **terminal velocity**.
 
-![A falling object with gravity and linear air resistance, with velocity approaching terminal velocity](assets/diagrams/one-idea-terminal-velocity.svg)
+<img src="assets/diagrams/one-idea-terminal-velocity.svg" alt="A falling object with gravity and linear air resistance, with velocity approaching terminal velocity" width="760">
 
 **Differential equation**
 
@@ -344,7 +344,7 @@ Initially, the concentration is high, so it decreases quickly.
 
 As the reactant is consumed, its concentration becomes smaller and the reaction slows down.
 
-![A first-order chemical reaction with reactant concentration decreasing with time](assets/diagrams/one-idea-chemical.svg)
+<img src="assets/diagrams/one-idea-chemical.svg" alt="A first-order chemical reaction with reactant concentration decreasing with time" width="760">
 
 **Differential equation**
 
