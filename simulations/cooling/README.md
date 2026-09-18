@@ -270,7 +270,7 @@ The simulation should:
 - approach `25°C` in both cases
 - never overshoot the ambient temperature
 - gradually flatten
-- run long enough for the different steady states to be obvious
+- run long enough for the different starting responses to clearly converge toward the same steady-state temperature
 
 ### Run Button
 
