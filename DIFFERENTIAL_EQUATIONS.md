@@ -227,11 +227,28 @@ The same mathematical idea appears in very different physical systems.
 
 ### Thermal System — Cooling
 
+#### What is happening?
+
+A cup of hot tea is placed in cooler surroundings.
+
+At the beginning, the difference between the tea temperature and the surrounding temperature is large, so the tea cools quickly.
+
+As the tea cools, this temperature difference becomes smaller, so the rate of cooling decreases.
+
+Eventually, the tea temperature approaches the surrounding temperature.
+
 ![A hot cup cooling toward ambient temperature, with its temperature response graph](assets/diagrams/one-idea-cooling.svg)
 
 **Differential equation**
 
 **dT/dt = -(1/τ)(T - Tₐ)**
+
+**Terms**
+
+- **T(t)** — temperature of the tea at time **t**
+- **Tₐ** — ambient temperature
+- **T₀** — initial temperature of the tea
+- **τ** — thermal time constant
 
 **Solution**
 
