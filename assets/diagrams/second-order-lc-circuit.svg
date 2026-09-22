@@ -9,6 +9,6 @@
 <line class="capacitor" x1="132" y1="105" x2="132" y2="77"/>
 <line class="capacitor" x1="168" y1="105" x2="168" y2="77"/>
 <line class="bridge" x1="132" y1="84" x2="168" y2="84"/>
-<text class="label" x="150" y="20" text-anchor="middle">inductor</text>
-<text class="label" x="150" y="137" text-anchor="middle">capacitor</text>
+<text class="label" x="150" y="20" text-anchor="middle">L</text>
+<text class="label" x="150" y="137" text-anchor="middle">C</text>
 </svg>

@@ -11,6 +11,7 @@
 <line class="support" x1="150" y1="28" x2="150" y2="120" stroke-dasharray="4 4" opacity=".65"/>
 <path class="support" d="M150 55 A27 27 0 0 0 167 49" stroke-width="1.5"/>
 <text class="label" x="181" y="57">string</text>
+<text class="label" x="185" y="75">l</text>
 <text class="label" x="231" y="106">bob</text>
 <text class="label" x="164" y="67">&#952;</text>
 <text class="label" x="150" y="139" text-anchor="middle">equilibrium</text>
