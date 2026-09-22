@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 145" role="img" aria-labelledby="title desc">
+<title id="title">Spring-mass system</title>
+<desc id="desc">A fixed wall, horizontal spring, block, and equilibrium reference.</desc>
+<style>
+.surface{stroke:#a9bdb3;stroke-width:2;fill:none;stroke-linecap:round}.wall{fill:#b9c9c0;stroke:#183331;stroke-width:1.2}.spring{stroke:#16858a;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}.block{fill:#e4773e;stroke:#a9532d;stroke-width:1.5}.label{fill:#627775;font:11px Arial,sans-serif}
+</style>
+<line class="surface" x1="35" y1="100" x2="270" y2="100"/>
+<rect class="wall" x="27" y="42" width="12" height="58"/>
+<path class="spring" d="M39 70 L55 70 L65 54 L78 86 L91 54 L104 86 L117 54 L130 86 L143 54 L156 86 L169 54 L182 70 L217 70"/>
+<rect class="block" x="217" y="51" width="42" height="38" rx="5"/>
+<line class="surface" x1="238" y1="112" x2="238" y2="130"/>
+<line class="surface" x1="211" y1="121" x2="265" y2="121" stroke-dasharray="4 4"/>
+<text class="label" x="238" y="141" text-anchor="middle">equilibrium</text>
+</svg>

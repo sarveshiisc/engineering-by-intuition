@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 145" role="img" aria-labelledby="title desc">
+<title id="title">Ideal LC circuit</title>
+<desc id="desc">A simple loop containing an inductor and capacitor.</desc>
+<style>
+.line{stroke:#183331;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.inductor{stroke:#16858a;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}.capacitor{stroke:#e4773e;stroke-width:4}.bridge{stroke:#a9bdb3;stroke-width:2}.label{fill:#627775;font:11px Arial,sans-serif}
+</style>
+<path class="line" d="M55 42 H105 M195 42 H245 V105 H55 V42"/>
+<path class="inductor" d="M105 42 C112 22 122 22 129 42 C136 62 146 62 153 42 C160 22 170 22 177 42 C184 62 190 62 195 42"/>
+<line class="capacitor" x1="132" y1="105" x2="132" y2="77"/>
+<line class="capacitor" x1="168" y1="105" x2="168" y2="77"/>
+<line class="bridge" x1="132" y1="84" x2="168" y2="84"/>
+<text class="label" x="150" y="20" text-anchor="middle">inductor</text>
+<text class="label" x="150" y="137" text-anchor="middle">capacitor</text>
+</svg>

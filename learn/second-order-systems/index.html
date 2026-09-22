@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion Over Time | Engineering by Intuition</title>
+<style>
+:root{--ink:#183331;--muted:#627775;--line:#d7dfd7;--teal:#16858a;--dark:#0c6269;--orange:#e4773e;--paper:#fffdf8;--soft:#edf5f1;--shadow:0 16px 35px rgba(35,69,64,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:linear-gradient(135deg,#faf7ef,#eef5ef);font-family:Georgia,'Times New Roman',serif}.page{max-width:980px;margin:0 auto;padding:28px 24px 64px}.top{display:flex;justify-content:space-between;align-items:center;padding-bottom:22px;border-bottom:1px solid var(--line)}.brand{color:var(--ink);text-decoration:none;font:700 .9rem Arial,sans-serif;letter-spacing:.04em}.topnav{display:flex;gap:22px}.topnav a{color:var(--muted);text-decoration:none;font:700 .8rem Arial,sans-serif}.eyebrow{color:var(--dark);font:700 .74rem Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase}.intro{max-width:760px;padding:55px 0 30px}.intro h1{max-width:760px;margin:12px 0 19px;font-size:clamp(2.8rem,6vw,5.1rem);font-weight:500;line-height:.96;letter-spacing:-.045em}.intro p{max-width:690px;margin:0;color:var(--muted);font-size:1.2rem;line-height:1.55}.motion-figure{margin:0;padding:25px 25px 27px;background:rgba(255,253,248,.88);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}.motion-figure figcaption{margin:0 0 15px;color:var(--muted);font:700 .78rem Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase}.motion-svg{display:block;width:100%;height:auto;overflow:visible}.axis{stroke:var(--ink);stroke-width:2;stroke-linecap:round}.guide{stroke:#c8d8d2;stroke-width:1.5;stroke-dasharray:6 7}.projection{stroke:var(--orange);stroke-width:1.5;stroke-dasharray:5 6;opacity:.6}.curve{fill:none;stroke:var(--teal);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.current-dot{fill:var(--orange);stroke:var(--paper);stroke-width:3}.system-line{stroke:var(--ink);stroke-width:3;stroke-linecap:round}.surface{fill:#dce7df;stroke:#afc2b8;stroke-width:1}.wall{fill:#b9c9c0;stroke:var(--ink);stroke-width:1.5}.spring{fill:none;stroke:var(--teal);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.block{fill:var(--orange);stroke:#a9532d;stroke-width:1.5}.svg-label{fill:var(--ink);font:16px Arial,sans-serif}.svg-label.small{font-size:14px;fill:var(--muted)}.svg-label.axis-label{font-weight:700;fill:var(--dark)}.svg-label.time-label{font-weight:700}.controls{display:flex;justify-content:center;gap:10px;margin-top:22px}.controls button{min-width:105px;border:0;border-radius:7px;padding:12px 17px;cursor:pointer;font:700 .9rem Arial,sans-serif}.primary{color:#fff;background:var(--dark)}.primary:hover,.primary:focus-visible{background:#084f55}.secondary{color:var(--ink);background:#e9efea}.secondary:hover,.secondary:focus-visible{background:#dce8df}.controls button:focus-visible{outline:3px solid rgba(228,119,62,.38);outline-offset:2px}.takeaway{margin:37px auto 0;max-width:720px;text-align:center;color:var(--dark);font-size:1.45rem;line-height:1.4}.sr-status{min-height:1.25em;margin:12px 0 0;text-align:center;color:var(--muted);font:700 .8rem Arial,sans-serif}
+ .motion-svg{transform:scaleY(.8);transform-origin:top;margin-bottom:-21.6%}
+.prediction-section{padding:42px 0 10px;border-top:1px solid var(--line)}.prediction-section h2{margin:0 0 11px;font-size:2.15rem;font-weight:500;line-height:1.08}.prediction-intro{margin:0 0 27px;color:var(--muted);font-size:1.18rem;line-height:1.5}.prediction-grid{display:grid;grid-template-columns:1fr;gap:18px}.prediction-card{padding:25px;background:rgba(255,253,248,.9);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}.prediction-card h3{margin:9px 0 10px;font-size:1.45rem;font-weight:500}.prediction-card p{margin:0 0 17px;font-size:1.02rem;line-height:1.55}.prediction-choices{display:grid;gap:10px;margin:20px 0}.prediction-choice{position:relative;display:flex;align-items:center;justify-content:center;min-height:64px;padding:14px;border:1px solid var(--line);border-radius:8px;background:#f9fbf6;color:var(--ink);font:700 1.05rem Arial,sans-serif;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}.prediction-choice:hover,.prediction-choice:focus-within{border-color:var(--teal);background:#edf5f1}.prediction-choice:has(input:checked){border-color:var(--teal);background:#e4f1ed;color:var(--dark);box-shadow:inset 0 0 0 2px var(--teal)}.prediction-choice input{position:absolute;opacity:0;width:1px;height:1px}.prediction-choice input:focus-visible + span{outline:3px solid rgba(22,133,138,.3);outline-offset:5px;border-radius:3px}.prediction-check{width:100%;padding:13px 16px;border:0;border-radius:7px;background:var(--dark);color:#fff;font:700 .9rem Arial,sans-serif;cursor:pointer}.prediction-check:hover:not(:disabled),.prediction-check:focus-visible:not(:disabled){background:#084f55;transform:translateY(-1px)}.prediction-check:disabled{cursor:not-allowed;opacity:.48}.prediction-result{margin-top:18px;padding:16px;border-left:4px solid var(--teal);border-radius:5px;background:#eaf4f0}.prediction-result[hidden]{display:none}.prediction-result.gentle{border-left-color:var(--orange);background:#fff3e9}.prediction-result p{margin:0 0 10px}.prediction-result p:last-child{margin-bottom:0}.prediction-equation{margin:13px 0;padding:12px;background:var(--paper);border:1px solid var(--line);border-radius:6px;text-align:center;font:1.18rem Georgia,'Times New Roman',serif}.prediction-relation{color:var(--dark);font-weight:700}.prediction-answer{font:700 .78rem Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--dark)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.prediction-graph{margin:15px 0 14px;padding:10px 10px 8px;border:1px solid var(--line);border-radius:7px;background:#f9fbf6}.prediction-graph svg{display:block;width:100%;height:auto}.motion-surface{stroke:#9aaba3;stroke-width:2;stroke-linecap:round}.motion-wall{fill:#b9c9c0;stroke:var(--ink);stroke-width:1}.motion-spring{fill:none;stroke:var(--teal);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.motion-spring.changed{stroke:var(--orange)}.motion-block{fill:var(--teal);stroke:#0c6269;stroke-width:1}.motion-block.changed{fill:var(--orange);stroke:#a9532d}.motion-label{fill:var(--muted);font:700 11px Arial,sans-serif}.prediction-graph figcaption{display:flex;justify-content:center;gap:15px;margin-top:4px;color:var(--muted);font:700 .72rem Arial,sans-serif}.graph-key{display:inline-flex;align-items:center;gap:5px}.graph-key i{display:inline-block;width:14px;height:3px;background:var(--teal)}.graph-key.changed i{background:var(--orange)}
+.prediction-card{display:grid;grid-template-columns:minmax(0,.95fr) minmax(250px,1.05fr);column-gap:24px;align-items:start}.prediction-card .prediction-result{grid-column:2;grid-row:1 / span 5;margin-top:0}.prediction-card .prediction-result[hidden]{display:block;visibility:hidden;pointer-events:none}
+@media(max-width:600px){.page{padding:20px 16px 45px}.top{padding-bottom:17px}.topnav{gap:12px}.topnav a{font-size:.74rem}.intro{padding:39px 0 23px}.intro h1{font-size:3rem}.intro p{font-size:1.05rem}.motion-figure{padding:16px 10px 20px;border-radius:10px}.motion-figure figcaption{margin-left:3px}.svg-label{font-size:14px}.svg-label.small{font-size:12px}.controls button{min-width:0;flex:1}.takeaway{font-size:1.25rem}}
+@media(prefers-reduced-motion:reduce){.motion-svg *{transition:none!important}}
+@media(max-width:600px){.prediction-grid{grid-template-columns:1fr}.prediction-card{display:block;padding:20px 17px}.prediction-card .prediction-result{margin-top:18px}.prediction-card .prediction-result[hidden]{display:none}}
+.systems-section{padding:48px 0 10px;border-top:1px solid var(--line)}.systems-section h2{margin:0 0 12px;font-size:2.15rem;font-weight:500;line-height:1.08}.systems-intro{max-width:700px;margin:0 0 28px;color:var(--muted);font-size:1.12rem;line-height:1.6}.systems-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.system-card{min-width:0;padding:20px 18px;background:rgba(255,253,248,.9);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}.system-card h3{margin:8px 0 12px;font-size:1.25rem;font-weight:500}.system-card p{margin:0 0 14px;font-size:.99rem;line-height:1.55}.system-art{display:block;width:100%;height:auto;margin:4px 0 17px}.system-art .art-line{stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.system-art .art-soft{stroke:#a9bdb3;stroke-width:2;fill:none;stroke-linecap:round}.system-art .art-teal{stroke:var(--teal);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}.system-art .art-orange{fill:var(--orange);stroke:#a9532d;stroke-width:1.5}.system-art .art-fill{fill:#b9c9c0;stroke:var(--ink);stroke-width:1.2}.system-art .art-label{fill:var(--muted);font:11px Arial,sans-serif}.system-equation{margin:15px 0;padding:13px 8px;background:var(--soft);border-left:3px solid var(--teal);border-radius:6px;text-align:center;font:1.03rem/1.7 Georgia,'Times New Roman',serif}.system-equation .coefficient{padding:2px 5px;background:#fbe4d5;border-radius:4px;color:#8a4b2b;font-weight:700}.system-note{color:var(--muted);font-size:.95rem!important}.common-pattern{margin-top:28px;padding:27px 24px 30px;background:var(--dark);border-radius:13px;color:#fff}.common-pattern .eyebrow{color:#b9e0d8}.common-pattern h3{margin:8px 0 18px;font-size:1.65rem;font-weight:500}.common-equations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:20px}.common-equation{padding:12px 8px;border:1px solid rgba(255,255,255,.22);border-radius:7px;text-align:center;font:1rem/1.6 Georgia,'Times New Roman',serif}.common-equation strong{display:block;color:#b9e0d8;font:700 .72rem Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase}.general-equation{margin:20px auto;padding:16px;background:var(--paper);color:var(--ink);border-radius:8px;text-align:center;font-size:1.55rem}.common-pattern .emphasis{margin:20px 0 10px;text-align:center;font-size:1.3rem;line-height:1.4}.common-pattern .closing{max-width:650px;margin:0 auto;color:#d7ebe5;text-align:center;line-height:1.6}.systems-bridge{margin:28px 0 0;padding:25px 0 8px;border-top:1px solid var(--line);color:var(--muted)}.systems-bridge p{max-width:720px;margin:0 0 17px;font-size:1.05rem;line-height:1.7}.next-cue{color:var(--dark);font-size:1.15rem!important;font-weight:700}
+@media(max-width:700px){.systems-grid,.common-equations{grid-template-columns:1fr}.system-card{padding:19px 17px}.common-pattern{padding:23px 17px 25px}.general-equation{font-size:1.25rem}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="top"><a class="brand" href="../../index.html">Engineering by Intuition</a><nav class="topnav" aria-label="Main navigation"><a href="../../index.html#learn">Learn</a><a href="../../index.html#labs">Labs</a><a href="../../index.html#about">About</a></nav></header>
+<main>
+<section class="intro"><div class="eyebrow">Second-order systems / A visual idea</div><h1>What Does the Motion Look Like Over Time?</h1><p>The block moves back and forth along a straight line.<br>But if we continuously record its position as time moves forward, something interesting appears.</p></section>
+<figure class="motion-figure" aria-labelledby="figure-title">
+<figcaption id="figure-title">Position recorded as time passes</figcaption>
+<svg id="motionSvg" class="motion-svg" viewBox="0 0 760 820" role="img" aria-labelledby="svgTitle svgDescription">
+<title id="svgTitle">A spring-mass system creating a position versus time trace</title>
+<desc id="svgDescription">A block moves horizontally below a graph. The graph's time axis increases upward, and the current position is projected vertically from the block to a growing sinusoidal trace.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#183331"></path></marker></defs>
+<g aria-hidden="true">
+<line class="guide" x1="220" y1="80" x2="220" y2="555"></line><line class="guide" x1="380" y1="80" x2="380" y2="555"></line><line class="guide" x1="540" y1="80" x2="540" y2="555"></line>
+<line class="guide" x1="220" y1="555" x2="540" y2="555"></line><line class="guide" x1="220" y1="317" x2="540" y2="317"></line><line class="guide" x1="220" y1="80" x2="540" y2="80"></line>
+<line class="axis" x1="220" y1="555" x2="565" y2="555" marker-end="url(#arrow)"></line><line class="axis" x1="220" y1="555" x2="220" y2="64" marker-end="url(#arrow)"></line>
+<path id="trace" class="curve" d="M580 555"></path><line id="projection" class="projection" x1="580" y1="555" x2="580" y2="672"></line><circle id="graphDot" class="current-dot" cx="580" cy="555" r="7"></circle>
+<text class="svg-label axis-label" x="613" y="562">x (displacement)</text><text class="svg-label axis-label time-label" x="169" y="55">t (time)</text>
+<text class="svg-label small" x="220" y="579" text-anchor="middle">-A</text><text class="svg-label small" x="380" y="579" text-anchor="middle">0</text><text class="svg-label small" x="540" y="579" text-anchor="middle">+A</text>
+<text class="svg-label small" x="201" y="560" text-anchor="end">0</text><text class="svg-label small" x="201" y="322" text-anchor="end">T</text><text class="svg-label small" x="201" y="85" text-anchor="end">2T</text>
+<line class="system-line" x1="95" y1="672" x2="635" y2="672"></line><rect class="surface" x="95" y="672" width="540" height="18" rx="2"></rect><rect class="wall" x="95" y="605" width="25" height="67" rx="2"></rect>
+<path id="spring" class="spring" d="M150 638"></path><rect id="block" class="block" x="542" y="615" width="76" height="57" rx="7"></rect>
+<line class="system-line" x1="220" y1="708" x2="540" y2="708"></line><line class="system-line" x1="220" y1="702" x2="220" y2="714"></line><line class="system-line" x1="380" y1="702" x2="380" y2="714"></line><line class="system-line" x1="540" y1="702" x2="540" y2="714"></line>
+<text class="svg-label small" x="220" y="735" text-anchor="middle">-A</text><text class="svg-label small" x="380" y="735" text-anchor="middle">0</text><text class="svg-label small" x="540" y="735" text-anchor="middle">+A</text><text class="svg-label small" x="380" y="762" text-anchor="middle">equilibrium position</text><text class="svg-label small" x="107" y="595" text-anchor="middle">wall</text><text class="svg-label small" x="380" y="790" text-anchor="middle">frictionless horizontal surface</text>
+</g></svg>
+<div class="controls"><button id="playButton" class="primary" type="button">Play</button><button id="resetButton" class="secondary" type="button">Reset</button></div><p id="status" class="sr-status" aria-live="polite">Ready at t = 0, x = +A</p>
+</figure>
+<p class="takeaway">The wave is simply a record of the block’s position as time passes.</p>
+<section class="prediction-section" aria-labelledby="prediction-title">
+<h2 id="prediction-title">8. Test It Yourself</h2>
+<p class="prediction-intro">Before calculating, try to predict.</p>
+<div class="prediction-grid">
+<article class="prediction-card" data-correct="faster">
+<div class="eyebrow">Question 1</div><h3>Make the spring stiffer</h3><p>Keep the mass the same and increase <strong>k</strong>.<br><strong>What happens to the oscillation?</strong></p>
+<fieldset class="prediction-choices"><legend class="sr-only">Choose what happens when the spring gets stiffer</legend><label class="prediction-choice"><input type="radio" name="stiffer-motion" value="faster"><span>Faster</span></label><label class="prediction-choice"><input type="radio" name="stiffer-motion" value="slower"><span>Slower</span></label></fieldset>
+<button class="prediction-check" type="button" disabled>Check prediction</button>
+<div class="prediction-result" hidden aria-live="polite"><div class="prediction-answer"></div><p class="prediction-feedback"></p><div class="prediction-equation">T = 2&pi;&radic;(m/k)</div><figure class="prediction-graph"><svg viewBox="0 0 360 150" role="img" aria-label="Two spring-mass systems comparing the original motion with the faster motion from the stiffer spring"><text class="motion-label" x="4" y="37">original</text><text class="motion-label" x="4" y="107">larger k</text><line class="motion-surface" x1="48" y1="48" x2="340" y2="48"></line><line class="motion-surface" x1="48" y1="118" x2="340" y2="118"></line><rect class="motion-wall" x="42" y="18" width="6" height="30"></rect><rect class="motion-wall" x="42" y="88" width="6" height="30"></rect><path class="motion-spring baseline"></path><path class="motion-spring changed"></path><rect class="motion-block baseline" x="230" y="26" width="30" height="22" rx="3"></rect><rect class="motion-block changed" x="230" y="96" width="30" height="22" rx="3"></rect></svg><figcaption><span class="graph-key"><i></i> original</span><span class="graph-key changed"><i></i> larger k</span></figcaption></figure><p class="prediction-relation">Larger k &rarr; smaller T &rarr; faster oscillation</p></div>
+</article>
+<article class="prediction-card" data-correct="slower">
+<div class="eyebrow">Question 2</div><h3>Make the block heavier</h3><p>Keep the spring the same and increase <strong>m</strong>.<br><strong>What happens to the oscillation?</strong></p>
+<fieldset class="prediction-choices"><legend class="sr-only">Choose what happens when the block gets heavier</legend><label class="prediction-choice"><input type="radio" name="heavier-motion" value="faster"><span>Faster</span></label><label class="prediction-choice"><input type="radio" name="heavier-motion" value="slower"><span>Slower</span></label></fieldset>
+<button class="prediction-check" type="button" disabled>Check prediction</button>
+<div class="prediction-result" hidden aria-live="polite"><div class="prediction-answer"></div><p class="prediction-feedback"></p><div class="prediction-equation">T = 2&pi;&radic;(m/k)</div><figure class="prediction-graph"><svg viewBox="0 0 360 150" role="img" aria-label="Two spring-mass systems comparing the original motion with the slower motion from the heavier block"><text class="motion-label" x="4" y="37">original</text><text class="motion-label" x="4" y="107">larger m</text><line class="motion-surface" x1="48" y1="48" x2="340" y2="48"></line><line class="motion-surface" x1="48" y1="118" x2="340" y2="118"></line><rect class="motion-wall" x="42" y="18" width="6" height="30"></rect><rect class="motion-wall" x="42" y="88" width="6" height="30"></rect><path class="motion-spring baseline"></path><path class="motion-spring changed"></path><rect class="motion-block baseline" x="230" y="26" width="30" height="22" rx="3"></rect><rect class="motion-block changed" x="230" y="96" width="30" height="22" rx="3"></rect></svg><figcaption><span class="graph-key"><i></i> original</span><span class="graph-key changed"><i></i> larger m</span></figcaption></figure><p class="prediction-relation">Larger m &rarr; larger T &rarr; slower oscillation</p></div>
+</article>
+</div>
+</section>
+<section class="systems-section" aria-labelledby="systems-title">
+<h2 id="systems-title">9. One Idea, Many Systems</h2>
+<p class="systems-intro">We discovered second-order behavior using a mass and a spring.<br>But the same mathematical structure appears in very different physical systems.</p>
+<div class="systems-grid">
+<article class="system-card">
+<div class="eyebrow">Mechanical</div><h3>Spring&ndash;Mass</h3><p>For our spring&ndash;mass system:</p>
+<img class="system-art" src="../../assets/diagrams/second-order-spring-mass.svg" alt="A wall, horizontal spring, block, and equilibrium reference">
+<div class="system-equation">m d<sup>2</sup>x/dt<sup>2</sup> + kx = 0<br>d<sup>2</sup>x/dt<sup>2</sup> + (<span class="coefficient">k/m</span>)x = 0</div><p>And we found:</p><div class="system-equation">x(t) = A cos(&omega;t)<br>&omega; = &radic;(k/m)</div><p class="system-note">The block moves back and forth around its equilibrium position.</p>
+</article>
+<article class="system-card">
+<div class="eyebrow">Electrical</div><h3>LC Circuit</h3><p>Now consider something that looks completely different: an inductor and a capacitor connected together.</p>
+<img class="system-art" src="../../assets/diagrams/second-order-lc-circuit.svg" alt="A simple ideal inductor-capacitor loop">
+<div class="system-equation">L d<sup>2</sup>q/dt<sup>2</sup> + (1/C)q = 0<br>d<sup>2</sup>q/dt<sup>2</sup> + (<span class="coefficient">1/(LC)</span>)q = 0</div><p>Its solution has the same form:</p><div class="system-equation">q(t) = Q cos(&omega;t)<br>&omega; = 1/&radic;(LC)</div><p class="system-note">Electrical energy moves back and forth between the capacitor and the inductor. Different physical system. Same mathematical behavior.</p>
+</article>
+<article class="system-card">
+<div class="eyebrow">Mechanical</div><h3>Pendulum</h3><p>Now consider a pendulum swinging through small angles.</p>
+<img class="system-art" src="../../assets/diagrams/second-order-pendulum.svg" alt="A pendulum with a pivot, rod, and bob">
+<div class="system-equation">For small oscillations:<br>d<sup>2</sup>&theta;/dt<sup>2</sup> + (<span class="coefficient">g/l</span>)&theta; = 0</div><p>Its solution again has the same form:</p><div class="system-equation">&theta;(t) = &Theta; cos(&omega;t)<br>&omega; = &radic;(g/l)</div><p class="system-note">The pendulum swings back and forth around its equilibrium position. Again, the physical system is different, but the mathematics looks familiar.</p>
+</article>
+</div>
+<div class="common-pattern"><div class="eyebrow">The Common Pattern</div><h3>Different coefficients. The same structure.</h3><div class="common-equations"><div class="common-equation"><strong>Spring&ndash;mass</strong>d<sup>2</sup>x/dt<sup>2</sup> + (k/m)x = 0</div><div class="common-equation"><strong>LC circuit</strong>d<sup>2</sup>q/dt<sup>2</sup> + (1/LC)q = 0</div><div class="common-equation"><strong>Pendulum</strong>d<sup>2</sup>&theta;/dt<sup>2</sup> + (g/l)&theta; = 0</div></div><div class="general-equation">d<sup>2</sup>y/dt<sup>2</sup> + &omega;<sup>2</sup>y = 0</div><p class="emphasis">Different physical systems.<br><strong>The same mathematical structure.</strong></p><p class="closing">And once we recognize that structure, understanding one system can help us understand many others.</p></div>
+<div class="systems-bridge"><p>We started with a block and a spring.<br>From the forces acting on it, we discovered a second-order differential equation.<br>That equation predicted something remarkable: a motion that repeats itself.<br>But why do systems oscillate? And what determines the rhythm?</p><p class="next-cue">Next: Oscillations</p></div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+  const svg = document.getElementById('motionSvg');
+  const block = document.getElementById('block');
+  const spring = document.getElementById('spring');
+  const projection = document.getElementById('projection');
+  const graphDot = document.getElementById('graphDot');
+  const trace = document.getElementById('trace');
+  const playButton = document.getElementById('playButton');
+  const resetButton = document.getElementById('resetButton');
+  const status = document.getElementById('status');
+  const amplitude = 160;
+  const centerX = 380;
+  const period = 4000;
+  const cycleCount = 2;
+  const totalDuration = period * cycleCount;
+  const graphBottom = 555;
+  const graphHeight = 475;
+  const blockWidth = 76;
+  const blockY = 615;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let elapsed = 0;
+  let running = false;
+  let paused = false;
+  let lastFrame = 0;
+  let animationFrame = 0;
+  let tracePoints = [];
+
+  function displacement(time){ return amplitude * Math.cos(2 * Math.PI * time / period); }
+  function graphY(time){ return graphBottom - graphHeight * (time / totalDuration); }
+  function springPath(blockLeft){
+    const start = 120;
+    const end = blockLeft;
+    const length = Math.max(25, end - start);
+    const coils = 11;
+    const step = length / (coils * 2 + 2);
+    let path = 'M ' + start + ' 638 L ' + (start + step) + ' 638';
+    for(let i = 0; i < coils * 2; i += 1){
+      const x = start + step * (i + 2);
+      const y = i % 2 === 0 ? 624 : 652;
+      path += ' L ' + x.toFixed(2) + ' ' + y;
+    }
+    return path + ' L ' + end + ' 638';
+  }
+  function render(){
+    const x = centerX + displacement(elapsed);
+    const y = graphY(elapsed);
+    const blockLeft = x - blockWidth / 2;
+    block.setAttribute('x', blockLeft.toFixed(2));
+    spring.setAttribute('d', springPath(blockLeft));
+    graphDot.setAttribute('cx', x.toFixed(2));
+    graphDot.setAttribute('cy', y.toFixed(2));
+    projection.setAttribute('x1', x.toFixed(2));
+    projection.setAttribute('x2', x.toFixed(2));
+    projection.setAttribute('y1', y.toFixed(2));
+    projection.setAttribute('y2', '672');
+    const latest = tracePoints[tracePoints.length - 1];
+    if(!latest || Math.abs(latest.time - elapsed) > 1){ tracePoints.push({time:elapsed,x:x,y:y}); }
+    trace.setAttribute('d', tracePoints.map(function(point,index){ return (index ? 'L ' : 'M ') + point.x.toFixed(2) + ' ' + point.y.toFixed(2); }).join(' '));
+    const fraction = elapsed / period;
+    status.textContent = elapsed >= totalDuration ? 'Complete: two periods, t = 2T, x = +A' : 't = ' + fraction.toFixed(2) + 'T, x = ' + (displacement(elapsed) / amplitude).toFixed(2) + 'A';
+  }
+  function finish(){ running = false; paused = false; elapsed = totalDuration; playButton.textContent = 'Play'; render(); }
+  function frame(timestamp){
+    if(!running) return;
+    if(!paused){
+      if(!lastFrame) lastFrame = timestamp;
+      elapsed += timestamp - lastFrame;
+      lastFrame = timestamp;
+      if(elapsed >= totalDuration){ finish(); return; }
+      render();
+    } else { lastFrame = timestamp; }
+    animationFrame = requestAnimationFrame(frame);
+  }
+  function start(){
+    if(elapsed >= totalDuration) return;
+    if(reducedMotion){ elapsed = totalDuration; tracePoints = []; render(); finish(); return; }
+    running = true; paused = false; lastFrame = 0; playButton.textContent = 'Pause'; animationFrame = requestAnimationFrame(frame);
+  }
+  function togglePause(){
+    if(!running) return;
+    paused = !paused;
+    playButton.textContent = paused ? 'Resume' : 'Pause';
+    status.textContent = paused ? 'Paused at t = ' + (elapsed / period).toFixed(2) + 'T' : status.textContent;
+  }
+  function reset(){
+    cancelAnimationFrame(animationFrame); elapsed = 0; running = false; paused = false; lastFrame = 0; tracePoints = []; playButton.textContent = 'Play'; render();
+  }
+  playButton.addEventListener('click',function(){ if(running) togglePause(); else start(); });
+  resetButton.addEventListener('click',reset);
+  window.addEventListener('resize',render);
+  render();
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.prediction-card').forEach(function(card){
+    const correct = card.dataset.correct;
+    const choices = Array.from(card.querySelectorAll('input[type="radio"]'));
+    const checkButton = card.querySelector('.prediction-check');
+    const result = card.querySelector('.prediction-result');
+    const answer = card.querySelector('.prediction-answer');
+    const feedback = card.querySelector('.prediction-feedback');
+    const baselinePath = card.querySelector('.baseline');
+    const changedPath = card.querySelector('.changed');
+    let graphFrame = 0;
+    function springPath(blockLeft,centerY){
+      const start = 48;
+      const length = Math.max(30,blockLeft - start);
+      const coils = 8;
+      const step = length / (coils * 2 + 2);
+      let path = 'M ' + start + ' ' + centerY + ' L ' + (start + step) + ' ' + centerY;
+      for(let index = 0; index < coils * 2; index += 1){
+        const x = start + step * (index + 2);
+        const y = centerY + (index % 2 === 0 ? -7 : 7);
+        path += ' L ' + x.toFixed(2) + ' ' + y;
+      }
+      return path + ' L ' + blockLeft.toFixed(2) + ' ' + centerY;
+    }
+    function plotComparison(progress){
+      const changedPeriod = correct === 'faster' ? 0.68 : 1.32;
+      const baseCycles = 4.5;
+      const baseX = 200 + 55 * Math.cos(2 * Math.PI * baseCycles * progress);
+      const changedX = 200 + 55 * Math.cos(2 * Math.PI * baseCycles * progress / changedPeriod);
+      baselinePath.setAttribute('d',springPath(baseX,37));
+      changedPath.setAttribute('d',springPath(changedX,107));
+      card.querySelector('.motion-block.baseline').setAttribute('x',(baseX - 15).toFixed(2));
+      card.querySelector('.motion-block.changed').setAttribute('x',(changedX - 15).toFixed(2));
+    }
+    function animateComparison(){
+      cancelAnimationFrame(graphFrame);
+      const started = performance.now();
+      const duration = 6000;
+      function draw(timestamp){
+        const progress = Math.min(1,(timestamp - started) / duration);
+        plotComparison(progress);
+        if(progress < 1) graphFrame = requestAnimationFrame(draw);
+      }
+      graphFrame = requestAnimationFrame(draw);
+    }
+    choices.forEach(function(choice){
+      choice.addEventListener('change',function(){
+        cancelAnimationFrame(graphFrame);
+        checkButton.disabled = false;
+        result.hidden = true;
+        result.classList.remove('gentle');
+      });
+    });
+    checkButton.addEventListener('click',function(){
+      const selected = choices.find(function(choice){ return choice.checked; });
+      if(!selected) return;
+      const isCorrect = selected.value === correct;
+      answer.textContent = isCorrect ? 'Exactly.' : 'Look again.';
+      if(correct === 'faster'){
+        feedback.textContent = isCorrect ? 'A stiffer spring produces a stronger restoring force for the same displacement, so the motion repeats more quickly.' : 'Look again at what a stiffer spring does. It produces a stronger restoring force for the same displacement.';
+      } else {
+        feedback.textContent = isCorrect ? 'The same spring now has to accelerate a larger mass, so the motion repeats more slowly.' : 'Look again at what happens when the same spring has to accelerate a larger mass.';
+      }
+      result.classList.toggle('gentle',!isCorrect);
+      result.hidden = false;
+      animateComparison();
+    });
+  });
+})();
+</script>
+</body>
+</html>

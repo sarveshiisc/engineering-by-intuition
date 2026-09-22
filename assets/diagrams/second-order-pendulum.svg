@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 145" role="img" aria-labelledby="title desc">
+<title id="title">Small-angle pendulum</title>
+<desc id="desc">A pendulum pivot, rod, bob, and equilibrium reference.</desc>
+<style>
+.support{stroke:#183331;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.pivot{fill:#b9c9c0;stroke:#183331;stroke-width:1.2}.rod{stroke:#16858a;stroke-width:3;fill:none;stroke-linecap:round}.bob{fill:#e4773e;stroke:#a9532d;stroke-width:1.5}.label{fill:#627775;font:11px Arial,sans-serif}
+</style>
+<line class="support" x1="95" y1="28" x2="205" y2="28"/>
+<circle class="pivot" cx="150" cy="28" r="6"/>
+<line class="rod" x1="150" y1="28" x2="214" y2="103"/>
+<circle class="bob" cx="214" cy="103" r="12"/>
+<line class="support" x1="150" y1="28" x2="150" y2="120" stroke-dasharray="4 4" opacity=".65"/>
+<path class="support" d="M150 55 A27 27 0 0 0 167 49" stroke-width="1.5"/>
+<text class="label" x="181" y="57">string</text>
+<text class="label" x="231" y="106">bob</text>
+<text class="label" x="164" y="67">&#952;</text>
+<text class="label" x="150" y="139" text-anchor="middle">equilibrium</text>
+</svg>
