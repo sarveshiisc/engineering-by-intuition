@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sarveshiisc.github.io/engineering-by-intuition/sitemap.xml
